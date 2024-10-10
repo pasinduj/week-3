@@ -1,5 +1,6 @@
 ﻿using EntityModels.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Week3EntityFramework.Dtos;
 
 var context = new IndustryConnectWeek2Context();
@@ -51,6 +52,53 @@ foreach (Sale s in sales)
 }
 
 
+var customers = context.Customers.ToList();
+Console.WriteLine("List of all customers  who don't have sales");
+Console.WriteLine("============================================");
+foreach (Customer c in customers)
+{
+    if (c.Sales.IsNullOrEmpty()) {
+        Console.WriteLine(" " + c.FirstName + " " + c.LastName);
+    }
+}
+
+Console.WriteLine("============================================");
+Console.WriteLine("Insert Customer");
+
+var customer = new Customer
+{
+    DateOfBirth = DateTime.Now.AddYears(-20)
+};
+customer.FirstName = "Markus";
+customer.LastName = "Wolf";
+context.Customers.Add(customer);
+context.SaveChanges();
+
+Console.WriteLine("============================================");
+Console.WriteLine("Insert Store");
+Console.WriteLine("============================================");
+var store = new Store
+{
+  
+};
+store.Name = "Birkenhead";
+context.Stores.Add(store);
+context.SaveChanges();
+
+
+
+
+var stores = context.Stores.ToList();
+Console.WriteLine("List of all store  who have sales");
+Console.WriteLine("============================================");
+foreach (Store s in stores)
+{
+    if ( !(s.Sales.IsNullOrEmpty()) )
+    {
+        Console.WriteLine(" " + s.Name );
+    }
+}
+
 
 //context.Sales.Add(new Sale
 //{
@@ -66,19 +114,19 @@ foreach (Sale s in sales)
 
 
 
-Console.WriteLine("Which customer record would you like to update?");
+//Console.WriteLine("Which customer record would you like to update?");
 
-var response = Convert.ToInt32(Console.ReadLine());
+//var response = Convert.ToInt32(Console.ReadLine());
 
-var customer = context.Customers.Include(s => s.Sales)
-    .ThenInclude(p => p.Product)
-    .FirstOrDefault(c => c.Id == response);
-
-
-var total = customer.Sales.Select(s => s.Product.Price).Sum();
+//var customer = context.Customers.Include(s => s.Sales)
+//   .ThenInclude(p => p.Product)
+//   .FirstOrDefault(c => c.Id == response);
 
 
-var customerSales = context.CustomerSales.ToList();
+//var total = customer.Sales.Select(s => s.Product.Price).Sum();
+
+//temp comment
+//var customerSales = context.CustomerSales.ToList();
 
 //var totalsales = customer.Sales
 
@@ -102,7 +150,7 @@ var customerSales = context.CustomerSales.ToList();
 
 
 
-Console.ReadLine();
+//Console.ReadLine();
 
 
 
