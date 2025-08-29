@@ -10,6 +10,3 @@ Week 3 Software developer intern (Entity Framework)
 
 4. Find the list of all stores that have sales 
 
-Command line syntax
-
-dotnet-ef dbcontext scaffold "Server=localhost;Initial Catalog=IndustryConnectWeek2;Integrated Security=True;TrustServerCertificate=Yes" Microsoft.EntityFrameworkCore.SqlServer -o Models -f
