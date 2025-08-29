@@ -1,6 +1,6 @@
 # Week 3
 
-Week 3 Software developer intern (Entity Framework)
+Week 3 Software developer  (Entity Framework)
 
 1. Using the linq queries retrieve a list of all customers from the database who don't have sales
 
